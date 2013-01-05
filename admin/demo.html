@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Select test</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		$(function(){
+			            
+            $('#num_games').change(function(){
+                //get the number of fields required from the dropdown box
+                var num = $('#num_games').val();
+                
+                var r = 0;
+                var html = '';
+                
+                for (r=1;r<=num;r++)
+                {
+                    //html += 'Team ' + i + ': <input type="text" name="team-' + i + '"/><br/>';
+                    html += '<select id="home' + r + '" name=home"' + r +'">';
+                    html += '<option value="0">- SELECT -</option>';
+                    html += '<div id="options"></div>';
+                    html += '</select>&nbsp';
+                    html += '<select id="away' + r + '" name=away"' + r +'">';
+                    html += '<option value="0">- SELECT -</option>';
+                    html += '<div id="options"></div>';
+                    html += '</select></br>';
+                }
+                $('#matchup').html(html);
+            });
+            
+            $("select#ctlSport").change(function(){
+    			$.getJSON("select2.php",{id: $(this).val()}, function(j){
+					var options = '';
+                    
+                    var num = $('#num_games').val();
+                    
+					for (var i = 0; i < j.length; i++) {
+						options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+					}
+                    $("#ctlPerson").html(options);
+					$('#ctlPerson option:first').attr('selected', 'selected');
+                    
+                    for (var t=1; t<=num;t++) {
+                        $("#home"+t).html(options);
+                        $("#away"+t).html(options);
+                    }
+				})
+			})
+            
+		})
+		</script>
+	</head>
+	<body>
+        Number of games:
+        <input type="text" id="num_games" name="num_games"/> &nbsp;
+        Select Sport:
+		<select id="ctlSport">
+			<option value="0">- SELECT -</option>
+            <option value="basketball_teams">Basketball</option>
+            <option value="football_teams">Flag Football</option>
+            <option value="cricket_teams">Cricket</option>
+            <option value="soccer_teams">Soccer</option>
+            <option value="softball_teams">Softball</option>
+            <option value="volleyball_teams">Volleyball</option>
+		</select>
+        <div id="matchup"></div>
+	</body>
+</html>
