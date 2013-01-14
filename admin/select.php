@@ -10,9 +10,9 @@
     
     $ftb = mysql_query($query);
     
-//    $query = "SELECT `team` FROM `cricket_teams`";
+    $query = "SELECT `team` FROM `cricket_teams`";
     
-//    $crk = mysql_query($query);
+    $crk = mysql_query($query);
     
     $query = "SELECT `team` FROM `soccer_teams`";
     
@@ -45,7 +45,7 @@
         $ftbjson = substr($ftbjson, 0, strlen($ftbjson) - 2);
         $ftbjson .= " }]";
     }
-/**    
+   
     if(mysql_num_rows($crk)){
         $crkjson = "[ ";
         while($row=mysql_fetch_array($crk)){
@@ -54,7 +54,7 @@
         $crkjson = substr($crkjson, 0, strlen($crkjson) - 2);
         $crkjson .= " }]";
     }
-**/    
+   
     if(mysql_num_rows($soc)){
         $socjson = "[ ";
         while($row=mysql_fetch_array($soc)){

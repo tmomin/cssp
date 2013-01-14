@@ -1,3 +1,5 @@
+    <link rel="stylesheet"  href="http://jquerymobile.com/demos/1.2.0/css/themes/default/jquery.mobile-1.2.0.css" />
+    <link rel="stylesheet" href="http://jquerymobile.com/demos/1.2.0/docs/_assets/css/jqm-docs.css"/>
 <?php
 
     //connect to db
@@ -5,6 +7,7 @@
     
         //assign variable	
 		$pin = $_GET['pin'];
+        $sport = $_GET['sport'];
 		$sport_match = $_GET['sport'] . "_matchups";
         $sport_score = $_GET['sport'] . "_scores";
         $game_id = $_GET['matchup'];
@@ -17,6 +20,87 @@
         $home = $result['home'];
         $away = $result['away'];
         $status = $result['status'];
+
+    if ($sport == "cricket") {
+        
+        $result = mysql_query("SELECT * FROM $sport_score WHERE `game_id` = $game_id");
+        $result = mysql_fetch_array($result);
+        $homeruns = $result['homeruns'];
+        $homeovers = $result['homeovers'];
+        $homewck = $result['homewck'];
+        $awayruns = $result['awayruns'];
+        $awayovers = $result['awayovers'];
+        $awaywck = $result['awaywck'];
+        
+        if ($pin == $dbpin) {
+            
+            if ($status == 0) {
+            echo "<center><b>Home:</b> " . $home . "&nbsp; &nbsp; &nbsp;<b>Away:</b> " . $away . "
+                <table width='300' border='1' class='sample'>
+                <tr>
+                <th class='sample'>Team</th>
+                <th>Runs</th>
+                <th>Overs</th>
+                <th>Wickets</th>
+                </tr>
+                <tr>
+                <th>HOME</th>
+                <th><label id='homeruns'>" . $homeruns . "</label></th>
+                <th><label id='homeovers'>" . $homeovers . "</label></th>
+                <th><label id='homewck'>" . $homewck . "</label></th>
+                </tr>
+                <tr>
+                <th>AWAY</th>
+                <th><label id='awayruns'>" . $awayruns . "</label></th>
+                <th><label id='awayovers'>" . $awayovers . "</label></th>
+                <th><label id='awaywck'>" . $awaywck . "</label></th>
+                </tr>
+            </table></center>
+            
+            <input type='hidden' value='" . $game_id . "' id='game_id' />
+            <input type='hidden' value='" . $sport_match . "' id='sport_match' />
+            <input type='hidden' value='" . $sport_score . "' id='sport_score' />
+            
+            <section>
+
+                <center><lable>Select</lable></center></br>
+                <div class='switch switch-three candy blue'>
+                    <input id='runs' name='quarter' type='radio' value='runs' checked>
+                    <label for='runs' onclick=''>Runs</label>
+    
+                    <input id='overs' name='quarter' type='radio' value='overs'>    
+	                <label for='overs' onclick=''>Overs</label>
+    
+                	<input id='wck' name='quarter' type='radio' value='wck'>	
+                	<label for='wck' onclick=''>Wickets</label>
+    
+                	<span class='slide-button'></span>
+                </div>
+
+                <div id='container_buttons' align='center'>
+                    <p>
+                    <button type='button' name='score' id='home' value='home' class='button large blue wide' onclick='processClickInc($(this))'>Home +</button> &nbsp; &nbsp;
+                    <button type='button' name='score' id='away' value='away' class='button large green wide' onclick='processClickInc($(this))'>Away +</button>
+                    </p>
+                    <p>
+                    <button type='button' name='score' id='home' value='home' class='button large blue wide' onclick='processClickDec($(this))'>Home -</button> &nbsp; &nbsp;
+                    <button type='button' name='score' id='away' value='away' class='button large green wide' onclick='processClickDec($(this))'>Away -</button>
+                    </p>
+                    <p>
+                    <button type='button' name='score' id='end' value='end' class='button large red wider' onclick='' data-rel='popup' data-position-to='window' data-role='button' data-inline='true' data-transition='pop'>Game Over</button></br>
+                    <a href='#popupLogin' data-rel='popup' data-position-to='window' data-role='button' data-inline='true' data-transition='pop' class='button large red wider'>Dialog</a>
+                    </p>
+                </div>
+            </section>
+                <script src='../js/messi.js'></script>";
+            }
+            else
+            {
+                "This game is no longer available";
+            }
+        }	
+    }
+    else {
         
         $result = mysql_query("SELECT * FROM $sport_score WHERE `game_id` = $game_id");
         $result = mysql_fetch_array($result);
@@ -29,14 +113,10 @@
         $awayot = $result['awayot'];
         $awayf = $result['awayf'];
         
-        //echo $dbpin;
-        
         if ($pin == $dbpin) {
             
-            //echo $homeq2;
-            
-            //echo $homeq1;
-            echo "Home: " . $home . " Away: " . $away . "
+            if ($status == 0) {
+            echo "<center>Home: " . $home . " Away: " . $away . "
                 <table width='300' border='1' class='sample'>
                 <tr>
                 <th class='sample'>Team</th>
@@ -59,33 +139,51 @@
                 <th><label id='awayot'>" . $awayot . "</label></th>
                 <th><label id='awayf'>" . $awayf . "</label></th>
                 </tr>
-            </table>
+            </table></center>
             
             <input type='hidden' value='" . $game_id . "' id='game_id' />
             <input type='hidden' value='" . $sport_match . "' id='sport_match' />
             <input type='hidden' value='" . $sport_score . "' id='sport_score' />
             
-            <p>
-    		  <button type='button' name='score' id='homeq1' value='homeq1' onclick='processClickInc($(this))'>Home Q1 +</button>
-              <button type='button' name='score' id='homeq1' value='homeq1' onclick='processClickDec($(this))'>Home Q1 -</button>
-			  <button type='button' name='score' id='awayq1' value='awayq1' onclick='processClickInc($(this))'>Away Q1 +</button>
-              <button type='button' name='score' id='awayq1' value='awayq1' onclick='processClickDec($(this))'>Away Q1 -</button>
-              
-			</p>
-            <p>
-			  <button type='button' name='score' id='homeq2' value='homeq2' onclick='processClickInc($(this))'>Home Q2 +</button>
-              <button type='button' name='score' id='homeq2' value='homeq2' onclick='processClickDec($(this))'>Home Q2 -</button>
-			  <button type='button' name='score' id='awayq2' value='awayq2' onclick='processClickInc($(this))'>Away Q2 +</button>
-              <button type='button' name='score' id='awayq2' value='awayq2' onclick='processClickDec($(this))'>Away Q2 -</button>
-			</p>
-            <p>
-    		  <button type='button' name='score' id='homeot' value='homeot' onclick='processClickInc($(this))'>Home OT +</button>
-              <button type='button' name='score' id='homeot' value='homeot' onclick='processClickDec($(this))'>Home OT -</button>
-			  <button type='button' name='score' id='awayot' value='awayot' onclick='processClickInc($(this))'>Away OT +</button>
-              <button type='button' name='score' id='awayot' value='awayot' onclick='processClickDec($(this))'>Away OT -</button>
-			</p>";
+            <section>
+
+                <center><lable>Select Quarter</lable></center></br>
+                <div class='switch switch-three candy blue'>
+                    <input id='qrt1' name='quarter' type='radio' value='q1' checked>
+                    <label for='qrt1' onclick=''>Quarter 1</label>
+    
+                    <input id='qrt2' name='quarter' type='radio' value='q2'>    
+                    <label for='qrt2' onclick=''>Quarter 2</label>
+    
+                	<input id='ot' name='quarter' type='radio' value='ot'>	
+                	<label for='ot' onclick=''>Overtime</label>
+    
+                	<span class='slide-button'></span>
+                </div>
+
+                <div id='container_buttons' align='center'>
+                    <p>
+                    <button type='button' name='score' id='home' value='home' class='button large blue wide' onclick='processClickInc($(this))'>Home +</button> &nbsp; &nbsp;
+                    <button type='button' name='score' id='away' value='away' class='button large green wide' onclick='processClickInc($(this))'>Away +</button>
+                    </p>
+                    <p>
+                    <button type='button' name='score' id='home' value='home' class='button large blue wide' onclick='processClickDec($(this))'>Home -</button> &nbsp; &nbsp;
+                    <button type='button' name='score' id='away' value='away' class='button large green wide' onclick='processClickDec($(this))'>Away -</button>
+                    </p>
+                    <p>
+                    <button type='button' name='score' id='end' value='end' class='button large red wider' onclick='' data-rel='popup' data-position-to='window' data-role='button' data-inline='true' data-transition='pop'>Game Over</button></br>
+                    <a href='#popupLogin' data-rel='popup' data-position-to='window' data-role='button' data-inline='true' data-transition='pop' class='button large red wider'>Dialog</a>
+                    </p>
+                </div>
+            </section>
+                <script src='../js/messi.js'></script>";
+            }
+            else
+            {
+                "This game is no longer available";
+            }
         }
-		
+    }
 		//close db
 		mysql_close();
 

@@ -22,7 +22,7 @@ $.ajaxSetup({ cache: false }); // This part addresses an IE bug.  without it, IE
 
 setInterval(function() {
 
-    $('#content').load('includes/football.php');
+    $('#content').load('includes/softball.php');
 
 }, 1000); // the "3000" here refers to the time to refresh the div.  it is in milliseconds.
 

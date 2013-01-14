@@ -1,0 +1,2 @@
+[10-Jan-2013 02:46:51] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Can't connect to MySQL server on 'mysql0.db.koding.com' (4) in /home/usanstc/public_html/cssp/includes/dbconnect.php on line 6
+[10-Jan-2013 02:46:51] PHP Warning:  mysql_select_db(): supplied argument is not a valid MySQL-Link resource in /home/usanstc/public_html/cssp/includes/dbconnect.php on line 10

@@ -1,10 +1,118 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 
-<body>
-</body>
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+    <head>
+
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+        
+
+    	<!-- Standalone demo styles, not required by the toggles --->
+	    <link rel="stylesheet" href="../css/demo.css">
+
+    	<!-- Toggle Switch -->
+    	<link rel="stylesheet" href="../css/toggle-switch.css">
+
+        <link rel="stylesheet" type="text/css" href="../css/style1.css" />
+
+        <link rel="stylesheet" href="../css/button.css"> 
+		
+		<link rel="stylesheet"  href="http://jquerymobile.com/demos/1.2.0/css/themes/default/jquery.mobile-1.2.0.css" />
+
+		<link rel="stylesheet" href="http://jquerymobile.com/demos/1.2.0/docs/_assets/css/jqm-docs.css"/>
+        
+        
+		
+        <title>NST Scores Updater</title>
+
+            
+
+
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+		<script src="http://jquerymobile.com/demos/1.2.0/docs/_assets/js/jqm-docs.js"></script>
+
+		<script src="http://jquerymobile.com/demos/1.2.0/js/jquery.mobile-1.2.0.js"></script>
+
+		<script type="text/javascript" charset="utf-8">
+
+		$(function(){
+	
+            $("select#ctlSport").change(function(){
+				
+				var sport = $("select#ctlSport").val();
+				
+				if (sport == "basketball") {
+					
+					window.location = 'basketball-scores.php';
+				
+				} else if (sport == "cricket") {
+					
+					window.location = 'cricket-scores.php';
+				
+				} else if (sport == "football") {
+					
+					window.location = 'football-scores.php';
+					
+				} else if (sport == "soccer") {
+					
+					window.location = 'soccer-scores.php';
+					
+				} else if (sport == "softball") {
+					
+					window.location = 'softball-scores.php';
+					
+				} else if (sport == "volleyball") {
+					
+					window.location = 'volleyball-scores.php';
+					
+				}
+				
+			})
+
+		})
+
+		</script>
+
+
+
+	</head>
+
+	<body>
+
+    <div id="form">
+
+    <form name="scores" method="post" action="">
+
+        Select Sport:
+
+		<select id="ctlSport" name="ctlSport">
+
+			<option value="0">- SELECT -</option>
+
+            <option value="basketball">Basketball</option>
+
+            <option value="football">Flag Football</option>
+
+            <option value="cricket">Cricket</option>
+
+            <option value="soccer">Soccer</option>
+
+            <option value="softball">Softball</option>
+
+            <option value="volleyball">Volleyball</option>
+
+		</select> &nbsp;
+
+    </form>
+
+    </div>
+    
+	</body>
+
 </html>

@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Basketball Scoreboards</title>
+    <title>Football Scoreboards</title>
 
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
@@ -82,7 +82,7 @@ tr.scores {
 	
 	$detect = new Mobile_Detect();
 
-    $sql = "SELECT * FROM basketball_scores";
+    $sql = "SELECT * FROM volleyball_scores";
     $scores = mysql_query($sql);
 
     if(mysql_num_rows($scores)){
@@ -96,7 +96,7 @@ tr.scores {
     }
 
     $data = json_decode($json);
-    $sql2 = "SELECT * FROM basketball_matchups";
+    $sql2 = "SELECT * FROM volleyball_matchups";
     $matchups = mysql_query($sql2);
 
     if(mysql_num_rows($matchups)){
@@ -118,8 +118,6 @@ tr.scores {
     $col = 3;
     $row = 2;
     $rm = $count % $row;
-	
-	echo "<center><h1>Basketball Scores</h1></center>";
 	
 	if ($detect->isMobile()) {
 		for ($r=0; $r<$count; $r++) {
